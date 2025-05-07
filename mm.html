@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <style> .results-carousel .item img { width: 512px; height: 512px; } </style>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="MotionMaster: Training-free Camera Motion Transfer For Video Generation">
+  <meta name="keywords" content="Video Generation, Camera Motion transfer, Camera-Object Motion, Disentanglement">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MotionMaster: Training-free Camera Motion Transfer For Video Generation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MotionMaster: Training-free Camera Motion Transfer For Video Generation</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://sjtuplayer.github.io/">Teng Hu</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="https://zhangzjn.github.io/">Jiangning Zhang</a><sup>2*</sup>,</span>
+              <span class="author-block">
+                <a href="https://yiranran.github.io/">Ran Yi</a><sup>1#</sup>,
+              </span>
+              <span class="author-block">
+                <a>Yating Wang</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a>Hongrui Huang</a><sup>3</sup>,
+              </span>
+              <br />
+              <span class="author-block">
+                <a > Jieyu Weng</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a>Yabiao Wang</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a >Lizhuang Ma</a><sup>1</sup>
+              </span>
+              <!-- <span class="author-block">
+                <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
+              </span> -->
+            </div>
+  
+            <!-- <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>University of Washington,</span>
+              <span class="author-block"><sup>2</sup>Google Research</span>
+            </div> -->
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Shanghai Jiao Tong University, Shanghai, China</span><br />
+              <span class="author-block"><sup>2</sup>Youtu Lab, Tencent, Shanghai, China </span><br />
+              <span class="author-block"><sup>3</sup>Harbin Institute of Technology, Harbin, China </span>
+            </div>
+  
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2404.15789.pdf"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2404.15789"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/sjtuplayer/MotionMaster"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                    </a>
+                </span>
+                <!-- Dataset Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="far fa-images"></i>
+                    </span>
+                    <span>Data</span>
+                    </a> -->
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="section" id="teaser">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <div class="column has-text-centered">
+        <div class="content">
+          <h3 class="title is-4">
+            Camera Motion Control
+          </h3>
+          <div class="item">
+<!--            <video id="teaser" autoplay controls muted loop playsinline height="100%">-->
+<!--              <source src="./static/videos/teaser.mp4"-->
+<!--                      type="video/mp4">-->
+<!--            </video>-->
+<!--            <img src="./static/my_images/teaser.gif" alt="GIF 1" autoplay loop playsinline height="100%">-->
+<iframe width="1024" height="576" src="https://www.youtube.com/embed/o3Fk4RgWC4A?si=RXqn2DaPy_4QfQYC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            The emergence of diffusion models has greatly propelled the progress
+            in image and video generation. Recently, some efforts have been
+            made in controllable video generation, including text-to-video,
+            image-to-video generation, video editing, and video motion control,
+            among which camera motion control is an important topic. However, existing camera motion control methods rely on training a
+            temporal camera module, and necessitate substantial computation
+            resources due to the large amount of parameters in video generation models. Moreover, existing methods pre-define camera motion
+            types during training, which limits their flexibility in camera control, preventing the realization of some specific camera controls,
+            such as various camera movements in films. Therefore, to reduce
+            training costs and achieve flexible camera control, we propose
+            MotionMaster, a novel training-free video motion transfer model, which
+            disentangles camera motions and object motions in source videos,
+            and transfers the extracted camera motions to new videos. We first
+            propose a one-shot camera motion disentanglement method to extract camera motion from a single source video, which separates
+            the moving objects from the background and estimates the camera
+            motion in the moving objects region based on the motion in the
+            background by solving a Poisson equation. Furthermore, we propose a few-shot camera motion disentanglement method to extract
+            the common camera motion from multiple videos with similar camera motions, which employs a window-based clustering technique
+            to extract the common features in temporal attention maps of multiple videos. Finally, we propose a motion combination method to
+            combine different types of camera motions together, enabling our
+            model a more controllable and flexible camera control. Extensive
+            experiments demonstrate that our training-free approach can effectively decouple camera-object motion and apply the decoupled
+            camera motion to a wide range of controllable video generation
+            tasks, achieving flexible and diverse camera motion control.
+        </div>
+        <div class="columns is-centered">
+          <img src="./static/my_images/teaser.png" class="interpolation-image" alt="Interpolate start reference image.">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="container has-text-centered">
+  <p><strong>Our demo is divided into two parts: firstly, <a href="#experimental-results" class="highlighted-link">all our experimental results</a>, and secondly, we provide a <a href="#gallery" class="highlighted-link">gallery to showcase various effects</a>.</strong></p>
+</div>
+
+<section class="section" id="experimental-results">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column has-text-centered">
+        <div class="content">
+          <!-- <h2 class="title is-3">Fig2</h2> -->
+          <h3 class="title is-4">
+            Source Video & Swap Attention Map
+          </h3>
+          <p>
+            We find that the temporal attention maps determine the generated video motions. By switching the temporal attention maps between the two videos in the first row, we
+            have the results in the second row, whose videos motions are totally swithed.
+          </p>
+          <div class="item">
+            <img src="./static/videos/fix_1-ezgif.com-loop-count.gif" alt="GIF 1">
+          </div>
+        </div>
+      </div>
+      </div>
+      <!--/ Visual Effects. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="column has-text-centered">
+    <h3 class="title is-4">
+      One-Shot Camera Motion Transfer
+    </h3>
+    <p>
+      Here are the one-shot camera motion transfer results compared to AnimateDiff+Lora and MotionCtrl.
+    </p>
+  </div>
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+
+      <!-- Visual Effects. -->
+      <div class="column">
+          <div class="item">
+            <img src="./static/videos/demo-ezgif.com-loop-count.gif" alt="GIF 1">
+          </div>
+      </div>
+      </div>
+    </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <!-- <div class="column">
+        <div class="columns is-centered">
+          <div class="column content">
+            <div class="item">
+              <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/fig2_2.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+    <!--/ Matting. -->
+</section>
+
+<section class="section">
+  <div class="column has-text-centered" style="margin-bottom: 50px;">
+    <h2 class="title is-4">Few-Shot Camera Motion Transfer</h2>
+    <p>
+      Here are the few-shot camera motion transfer results compared to AnimateDiff+Lora and MotionCtrl.
+    </p>
+  </div>
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="columns is-centered">
+        <div class="item">
+          <img src="./static/videos/demo2-ezgif.com-loop-count.gif" alt="GIF 1">
+        </div>
+      </div>
+      </div>
+    </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <!-- <div class="column">
+        <div class="columns is-centered">
+          <div class="column content">
+            <div class="item">
+              <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/fig2_2.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+    <!--/ Matting. -->
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column has-text-centered">
+        <div class="content">
+          <!-- <h2 class="title is-3">Fig2</h2> -->
+          <h3 class="title is-4">
+            Camera Motion Combination
+          </h3>
+          <p>
+      Here are the results combined with different camera motions.
+    </p>
+    <div class="columns is-centered">
+      <div class="item">
+        <img src="./static/videos/main_fig1-ezgif.com-loop-count.gif" alt="GIF 1">
+      </div>
+    </div>
+        </div>
+      </div>
+      <!--/ Visual Effects. -->
+  </div>
+    </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column has-text-centered">
+        <div class="content">
+          <!-- <h2 class="title is-3">Fig2</h2> -->
+          <h3 class="title is-4">
+            Variable-Speed Zoom
+          </h3>
+          <p>
+      Here are the results of variable-speed zoom in real films.
+    </p>
+    <div class="item">
+      <img src="./static/videos/fix_2-ezgif.com-loop-count.gif" alt="GIF 1">
+    </div>
+      </div>
+      <!--/ Visual Effects. -->
+    </div>
+  </div>
+    </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column has-text-centered">
+        <div class="content">
+          <!-- <h2 class="title is-3">Fig2</h2> -->
+          <h3 class="title is-4">
+            Ablation Study On One-Shot Camera Motion Disentanglement
+          </h3>
+          <p>
+      Here are abaltion studies on the one-shot camera motion disentanglement.
+    </p>
+    <div class="item">
+      <img src="./static/videos/fix_3-ezgif.com-loop-count.gif" alt="GIF 1">
+    </div>
+        </div>
+      </div>
+      <!--/ Visual Effects. -->
+      </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column has-text-centered">
+        <div class="content">
+          <!-- <h2 class="title is-3">Fig2</h2> -->
+          <h3 class="title is-4">
+            Ablation Study On Few-Shot Camera Motion Disentanglement
+          </h3>
+          <p>
+      Here are abaltion studies on the few-shot camera motion disentanglement.
+    </p>
+    <div class="item">
+      <img src="./static/videos/abla2-ezgif.com-loop-count.gif" alt="GIF 1">
+    </div>
+      </div>
+      <!--/ Visual Effects. -->
+  </div>
+    </div>
+    </div>
+</section>
+
+
+<div>
+  <div class="column has-text-centered" id="gallery">
+    <h2 class="title is-3">Gallery</h2>
+  </div>
+</div>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4">Zoom In</h2>
+        <div id="gallery-zoom_in" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/my_images/251.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/298-A-group-of-astronauts-conducting-a-spacewalk-outside-a-spacecraft..gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/10-A-couple-dancing-under-the-stars-at-a-romantic-beachside.gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/20.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/26.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/31.gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/40.gif" alt="GIF 7" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/88.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/160.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/5.gif" alt="GIF 10" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4">Zoom Out</h2>
+        <div id="gallery_zoom out" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/my_images/228-A-painter-capturing-the-essence-of-a-sunset-on-canvas..gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/264.gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/205-A-hot-air-balloon-drifting-peacefully-over-a-countryside..gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/49.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/80.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/208-A-motorcycle-speeding-along-a-desert-highway..gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/5_2.gif" alt="GIF 7" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/506.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/7.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/588.gif" alt="GIF 10" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4">Pan Left</h2>
+        <div id="gallery_pan_left" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/my_images/240-A-diver-exploring-a-coral-reef-underwater..gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/251-A-group-of-friends-camping-under-a-starry-sky..gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/222-A-group-of-firefighters-extinguishing-a-blazing-inferno..gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/1-A-yellow-school-bus-pulling-into-a-driveway..gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/721.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/507.gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/767.gif" alt="GIF 7" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/772.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/891.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/560.gif" alt="GIF 10" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4">Pan Right</h2>
+        <div id="gallery-pan_right" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/my_images/97-A-beekeeper-harvesting-honey-from-a-hive-on-a-sunny.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/16.gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/557.gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/601.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/604.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/13-Vast-prairie-under-a-clear-sky,-wildflowers-swaying-in-a.gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/14-Serene-lake-reflecting-the-surrounding-forest-and-mountains,-ducks-gliding.gif" alt="GIF 7" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/752.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/805.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/my_images/976.gif" alt="GIF 10" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="item">
+    <div class="column has-text-centered">
+      <!-- <h2 class="title is-3">Dolly Zoom</h2> -->
+      <!-- <h3 class="title is-4">origin image</h3>
+      <img src="./static/DollyZoom/origin.gif" alt="GIF 0"> -->
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4"> Left + In</h2>
+        <div id="gallery-leftin" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/leftin/9.gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftin/3.gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftin/4.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftin/5.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftin/6.gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftin/7.gif" alt="GIF 7" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftin/8.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftin/2.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftin/10.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="item">
+    <div class="column has-text-centered">
+      <!-- <h2 class="title is-3">Dolly Zoom</h2> -->
+      <!-- <h3 class="title is-4">origin image</h3>
+      <img src="./static/DollyZoom/origin.gif" alt="GIF 0"> -->
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4"> Left + Out</h2>
+        <div id="gallery-leftout" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/leftout/2.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftout/1.gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftout/5.gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftout/3.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftout/4.gif"alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftout/10.gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftout/7.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/leftout/9.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="item">
+    <div class="column has-text-centered">
+      <!-- <h2 class="title is-3">Dolly Zoom</h2> -->
+      <!-- <h3 class="title is-4">origin image</h3>
+      <img src="./static/DollyZoom/origin.gif" alt="GIF 0"> -->
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4"> Right + In</h2>
+        <div id="gallery-rightin" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/rightin/1.gif"alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/rightin/10.gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/rightin/6.gif" alt="GIF 7" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/rightin/7.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/rightin/5.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="item">
+    <div class="column has-text-centered">
+      <!-- <h2 class="title is-3">Dolly Zoom</h2> -->
+      <!-- <h3 class="title is-4">origin image</h3>
+      <img src="./static/DollyZoom/origin.gif" alt="GIF 0"> -->
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4"> Right + Out</h2>
+        <div id="gallery-rightout" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/rightout/1.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/rightout/2.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/rightout/5.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/rightout/9.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="hero is-light is-small">
+  <div class="item">
+    <div class="column has-text-centered">
+      <!-- <h2 class="title is-3">Dolly Zoom</h2> -->
+      <!-- <h3 class="title is-4">origin image</h3>
+      <img src="./static/DollyZoom/origin.gif" alt="GIF 0"> -->
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4"> Variable-speed Zoom In</h2>
+        <div id="gallery-sudden_zoom_in" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/SuddenZoomIn/13.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/3.gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/21.gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/27.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/34.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/23.gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/5.gif" alt="GIF 7" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/60.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/26.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomIn/89.gif" alt="GIF 10" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="item">
+    <div class="column has-text-centered">
+      <!-- <h2 class="title is-3">Dolly Zoom</h2> -->
+      <!-- <h3 class="title is-4">origin image</h3>
+      <img src="./static/DollyZoom/origin.gif" alt="GIF 0"> -->
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4"> Variable-speed Zoom out</h2>
+        <div id="gallery-sudden_zoom_out" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/SuddenZoomOut/1.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/2.gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/4.gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/3.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/5.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/6.gif" alt="GIF 6" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/7.gif" alt="GIF 7" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/8.gif" alt="GIF 8" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/9.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/SuddenZoomOut/10.gif" alt="GIF 9" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="item">
+    <div class="column has-text-centered">
+      <!-- <h2 class="title is-3">Dolly Zoom</h2> -->
+      <!-- <h3 class="title is-4">origin image</h3>
+      <img src="./static/DollyZoom/origin.gif" alt="GIF 0"> -->
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4">Dolly Zoom In</h2>
+        <p>
+            The camera in the background zooms in while the camera in the foreground keeps fixed.
+          </p>
+        <div id="gallery_on_sudden_zoom_in" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/DollyIn2/3_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/3_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/3_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/4_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/4_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/4_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/1_1.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/1_2.gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/1_3.gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/2_1.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/2_2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/2_3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/3_1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/3_3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/3_2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/2_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/2_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/2_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/5_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/5_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/5_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/1_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/1_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyIn2/1_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="item">
+    <div class="column has-text-centered">
+      <!-- <h2 class="title is-3">Dolly Zoom</h2> -->
+      <!-- <h3 class="title is-4">origin image</h3>
+      <img src="./static/DollyZoom/origin.gif" alt="GIF 0"> -->
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="column has-text-centered">
+        <h2 class="title is-4">Dolly Zoom Out</h2>
+        <p>
+            The camera in the background zooms out while the camera in the foreground keeps fixed.
+          </p>
+        <div id="gallery_on_sudden_zoom_out" class="carousel results-carousel">
+          <div class="item">
+            <img src="./static/DollyOut2/4_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/4_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/4_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/5_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/5_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/5_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/1_1.gif" alt="GIF 1" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/1_2.gif" alt="GIF 2" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/1_3.gif" alt="GIF 3" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/2_1.gif" alt="GIF 4" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/2_2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/2_3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/3_1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/3_3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/3_2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/1_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/1_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/1_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/2_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/2_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/2_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/3_processed/1.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/3_processed/2.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+          <div class="item">
+            <img src="./static/DollyOut2/3_processed/3.gif" alt="GIF 5" autoplay loop playsinline height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://arxiv.org/pdf/2404.15789.pdf">
+        <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg><!-- <i class="fas fa-file-pdf"></i> Font Awesome fontawesome.com -->
+      </a>
+      <a class="icon-link" href="https://github.com/sjtuplayer/MotionMaster" disabled="">
+        <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> Font Awesome fontawesome.com -->
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            We borrow the <a href="https://github.com/nerfies/nerfies.github.io">source code</a> for our website.
+            We sincerely appreciate Nerfies authors for their awesome templates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

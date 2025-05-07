@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HunyuanCustom: A Multimodal-Driven Architecture for Subject-Centric Video Generation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">HunyuanCustom: A Multimodal-Driven Architecture for Subject-Centric Video Generation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://hunyuan-video.woa.com/">Hunyuan Team</a><sup>1</sup>,</span>
+            <!-- <span class="author-block">
+              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
+            </span> -->
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Hunyuan, Tencent,</span>
+            <!-- <span class="author-block"><sup>2</sup>Google Research</span> -->
+          </div>
+
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="video-grid">
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/bigone/id.mp4" type="video/mp4">
+        </video>
+        <img src="./static/videos/bigone/id.jpg" alt="Overlay Image" class="overlay-image">
+        <div class="description">A girl plays "house" with plush toys in the living room.</div>
+      </div>
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/bigone/human.mp4" type="video/mp4">
+        </video>
+        <img src="./static/videos/bigone/human.png" alt="Overlay Image" class="overlay-image">
+        <div class="description">A woman is drinking coffee at a cafe.</div>
+      </div>
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/bigone/dog.mp4" type="video/mp4">
+        </video>
+        <img src="./static/videos/bigone/dog.png" alt="Overlay Image" class="overlay-image">
+        <div class="description">A dog is chasing a cat in the park.</div>
+      </div>
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/bigone/id.mp4" type="video/mp4">
+        </video>
+        <img src="./static/videos/bigone/id.jpg" alt="Overlay Image" class="overlay-image">
+        <div class="description">A girl plays "house" with plush toys in the living room.</div>
+      </div>
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/bigone/human.mp4" type="video/mp4">
+        </video>
+        <img src="./static/videos/bigone/human.png" alt="Overlay Image" class="overlay-image">
+        <div class="description">A woman is drinking coffee at a cafe.</div>
+      </div>
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/bigone/dog.mp4" type="video/mp4">
+        </video>
+        <img src="./static/videos/bigone/dog.png" alt="Overlay Image" class="overlay-image">
+        <div class="description">A dog is chasing a cat in the park.</div>
+      </div>
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/bigone/id.mp4" type="video/mp4">
+        </video>
+        <img src="./static/videos/bigone/id.jpg" alt="Overlay Image" class="overlay-image">
+        <div class="description">A girl plays "house" with plush toys in the living room.</div>
+      </div>
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/goodedit/2_res.mp4" type="video/mp4">
+        </video>
+        <!-- <img src="./static/videos/bigone/e1.png" alt="Overlay Image" class="overlay-image"> -->
+        <video class="overlay2-video" autoplay muted loop playsinline>
+          <source src="./static/videos/goodedit/2_video_resize.mp4" type="video/mp4">
+        </video>
+        <div class="description">A person is wearing a burgundy suit with a black shirt underneath. They are wearing a yellow hat with panda ears and are smiling at the camera. Against the gray wall background, it seems that they are about to or are in the middle of a magic show.</div>
+      </div>
+      <div class="video-item">
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/bigone/dog.mp4" type="video/mp4">
+        </video>
+        <img src="./static/videos/bigone/dog.png" alt="Overlay Image" class="overlay-image">
+        <div class="description">A dog is chasing a cat in the park.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            The field of video generation has advanced rapidly with the emergence of di-
+            verse open-source and commercial models. However, the limited controllability
+            in generating videos that precisely align with user requirements is still a persist-
+            nent challenge. This work focuses on the crucial aspect of subject-consistency
+            in video generation. Existing methods, whether single-subject-oriented (like ID-
+            Animator and MovieGen) or multi-subject-extended (ConceptMaster, Video Al-
+            chemist, PHANTOM), exhibit shortcomings in consistency and quality. VACE,
+            a multi-modal video-generation model, also struggles with ID-consistency due
+            to excessive training tasks. To address these issues, we introduce HunyuanCus-
+            tom, a novel multi-modal video-generation model built upon the HunyuanVideo
+            framework, with a focus on ID-consistent generation. By integrating a Llava-based
+            text-image fusion module and an image ID enhancement module, it enables the
+            generation of videos corresponding to given image IDs under text guidance. Fur-
+            thermore, it extends its capabilities to audio- and video-conditioned generation,
+            significantly enhancing its versatility. For audio-driven single-subject generation,
+            we propose Audio-Net which achieves multi-level audio-video feature alignment.
+            For video-conditioned operations, we develop a latent-alignment module and a
+            face-feature-aligned video patchfy module to enable efficient video information in-
+            jection. Extensive experiments on single-and multi-subject consistency generation
+            demonstrate that HunyuanCustom outperforms both open-source and commercial
+            models in ID-consistency, visual realism, and video-text alignment. Additional
+            evaluations on audio-driven generation, video object replacement, and object ad-
+            dition further validate the superiority of our approach, showcasing its potential to
+            improve controllable video generation.
+          </p>
+        </div>
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            doing
+          </p>
+        </div>
+        
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Single-Reference I2V</h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <b>
+            Consistency Story Generation
+          </b>
+        </div> 
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="item item-steve">
+            <p>Reference Image</p>
+            <img src="./static/images/singleref/hinton.jpeg"
+                style="width: 832px;" 
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="item item-steve">
+            <p>Eating breakfast</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/hinton_1.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <p>In a subway</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/hinton_2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <p>Working at desk</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/hinton_3.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <p>walking a dog</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/hinton_4.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <p>Sleeping at night</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/hinton_5.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="item item-steve">
+            <p>Reference Image</p>
+            <img src="./static/images/singleref/liuyifei.png"
+                 style="width: 832px;" 
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="item item-steve">
+            <p>Eating breakfast</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/lyf_1.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <p>In a subway</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/lyf_2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <p>Working at desk</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/lyf_3.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <p>walking a dog</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/lyf_4.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve">
+            <p>Sleeping at night</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/singleref/lyf_5.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+        
+        <div class="content has-text-justified">
+          <b>
+            Comparison with Other Works
+          </b>
+        </div>
+        <div class="columns is-centered singleref-diff ">
+          <div class="column is-2 has-text-centered">
+            <p>Reference Image</p>
+            <img src="./static/videos/single_diff/human_002.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <b style="color: red;">Ours</b>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/hunyuan_002.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Keling</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/keling_002.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Vidu</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/vidu_002.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Pika</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/pika_002.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Hailuo</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/hailuo_002.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Skyreels</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/skyreels_002.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+        <div class="columns is-centered singleref-diff ">
+          <div class="column is-2 has-text-centered">
+            <img src="./static/videos/single_diff/new_006.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/hunyuan_006.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/keling_006.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/vidu_006.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/pika_006.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/hailuo_006.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/skyreels_006.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+
+        <div class="columns is-centered singleref-diff ">
+          <div class="column is-2 has-text-centered">
+            <p>Reference Image</p>
+            <img src="./static/videos/single_diff/item_c1_box.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <b style="color: red;">Ours</b>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/hunyuan_c1.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Keling</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/keling_c1.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Vidu</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/vidu_c1.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Pika</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/pika_c1.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Skyreels</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/skyreels_c1.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>VACE</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/vace_c1.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+        <div class="columns is-centered singleref-diff ">
+          <div class="column is-2 has-text-centered">
+            <img src="./static/videos/single_diff/cloth_02.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/hunyuan_c2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/keling_c2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/vidu_c2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/pika_c2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/skyreels_c2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/single_diff/vace_c2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        <br/>
+
+  </div>
+</section>
+
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Single-Reference Audio-driven Video Generation</h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <b>
+            HunyuanCustom first enables audio-driven human customization, where the
+            character speaks the corresponding audio in a text-described scene, allowing for more flexible and
+            controllable audio-driven human animation.
+          </b>
+          <b style="color: red;">Please turn on the sound to watch the video.</b>
+        </div> 
+        <div class="columns is-centered ">
+          
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/audioref/woman03_concat.mp4"
+                      type="video/mp4">
+            </video>
+            <p>a single person, in the dressing room. A woman is holding a lipstick, trying it on, and introducing it. </p>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/audioref/woman04_concat.mp4"
+                      type="video/mp4">
+            </video>
+            <p>In a bakery, A woman holds a cake, introducing it. </p>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/audioref/woman07_concat.mp4"
+                      type="video/mp4">
+            </video>
+            <p>A woman plays the zither and sings by the ancient bridge in the old town.</p>
+          </div>
+        </div>
+        <br/>
+        <div class="columns is-centered ">
+          
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/audioref/man02_concat.mp4"
+                      type="video/mp4">
+            </video>
+            <p>A man delivers a powerful speech in the grand palace of China's Ming Dynasty.</p>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/audioref/man03_concat.mp4"
+                      type="video/mp4">
+            </video>
+            <p>At the store counter, a man is holding a mechanical watch in his hand and introducing it.</p>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/audioref/man04_concat.mp4"
+                      type="video/mp4">
+            </video>
+            <p>A man holding a guitar sings the song of youth cheerfully on the bustling street.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Video-driven Video Generation</h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <b>
+            Based on subject customization, HunyuanCustom also supports
+            using a video as the input to replace or add specified objects. Specifically, given a video with
+            its specified actions and environment, and then given an image with specified ID information,
+            HunyuanCustom can replace the specified object in the video with the ID specified in the image.
+          </b>
+        </div>
+        <div class="columns is-centered singleref-diff ">
+          <div class="column is-2 has-text-centered">
+            <p>Reference Image</p>
+            <img src="./static/videos/goodedit/1.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Source Video</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/goodedit/1_video.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <p>Edit Result</p>
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/goodedit/1_res.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+        <div class="columns is-centered singleref-diff ">
+          <div class="column is-2 has-text-centered">
+            <img src="./static/videos/goodedit/2.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/goodedit/2_video.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/goodedit/2_res.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+        <div class="columns is-centered singleref-diff ">
+          <div class="column is-2 has-text-centered">
+            <img src="./static/videos/goodedit/3.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/goodedit/3_video.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/goodedit/3_res.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+        <div class="columns is-centered singleref-diff ">
+          <div class="column is-2 has-text-centered">
+            <img src="./static/videos/goodedit/4.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/goodedit/4_video.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/goodedit/4_res.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+        
+        </div>
+        </div>
+        <br/>
+  </div>
+</section>
+
+
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Multi-Reference I2V</h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <b>
+            Comparisons
+          </b>
+        </div> 
+        </div>
+        
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{HunyuanCustom,
+  author    = {Hunyuan Team},
+  title     = {HunyuanCustom: A Multimodal-Driven Architecture for Subject-Centric Video Generation},
+  journal   = {Tech report},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website template is borrowed from <a rel="Nerfies" href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

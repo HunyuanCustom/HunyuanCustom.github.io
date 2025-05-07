@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格示例</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: red;
+            color: white;
+            padding: 10px;
+        }
+        td {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        img {
+            max-width: 100px; /* Adjust size as needed */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Reference</th>
+            <th>Prompt</th>
+            <th>Results</th>
+        </tr>
+        <tr>
+            <td><img src="./static/videos/bigone/dog.png" alt="Image 1"></td>
+            <td>这是第一行的文字描述。</td>
+            <td><video src="./static/videos/bigone/dog.mp4" controls></video></td>
+        </tr>
+        <tr>
+            <td><img src="./static/videos/bigone/id.jpg" alt="Image 2"></td>
+            <td>这是第二行的文字描述。</td>
+            <td><video src="./static/videos/bigone/id.mp4" controls></video></td>
+        </tr>
+    </table>
+</body>
+</html>

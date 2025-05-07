@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Grid Layout</title>
+    <style>
+        /* 设置全局样式 */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 网格容器 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px; /* 行列之间的间距 */
+            padding: 40px; /* 整体容器的边距 */
+        }
+
+        /* 每个视频容器 */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 主视频 */
+        .main-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 左上角的图片 */
+        .top-left-image {
+            position: absolute;
+            top: 12px;
+            left: 15px;
+            width: 80px; /* 图片宽度 */
+            height: auto; /* 高度自适应 */
+            border: 2px solid white;
+            border-radius: 50%; /* 圆形图片 */
+        }
+
+        /* 右上角的副视频 */
+        .top-right-video {
+            position: absolute;
+            top: 13px;
+            right: 50px;
+            width: 160px; /* 副视频宽度 */
+            height: auto; /* 高度自适应 */
+            border: 2px solid blue;
+            border-radius: 30%; /* 圆角矩形 */
+        }
+
+        /* 文本描述 */
+        .description {
+            position: absolute;
+            bottom: 18px;
+            left: 19px;
+            color: white;
+            font-size: 17px; /* 字体大小 */
+            background-color: rgba(0, 25, 255, 200); /* 背景颜色 */
+            padding: 22px;
+            border-radius: 60% 70% 45% 55%/65% 75% 35% 85%; /* 椭圆形边框 */
+            opacity: 99; /* 默认隐藏 */
+            transition: opacity 300ms ease-in-out;
+            
+        }
+
+        /* 鼠标悬停时显示文本描述 */
+        .video-container:hover .description {
+            opacity: 88;
+        }
+    </style>
+</head>
+<body>
+
+<div class="video-grid">
+    <!-- 第一行 -->
+    <div class="video-container">
+        <img src="https://via.placeholder.com/150" alt="Image 1" class="top-left-image">
+        <video autoplay muted loop playsinline class="main-video">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop playsinline class="top-right-video">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="description">This is the description for Video 1.</div>
+    </div>
+    <div class="video-container">
+        <img src="https://via.placeholder.com/160" alt="Image 2" class="top-left-image">
+        <video autoplay muted loop playsinline class="main-video">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop playsinline class="top-right-video">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="description">This is the description for Video 2.</div>
+    </div>
+
+    <!-- 第二行 -->
+    <div class="video-container">
+        <img src="https://via.placeholder.com/170" alt="Image 3" class="top-left-image">
+        <video controls class="main-video">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video controls class="top-right-video">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="description">This is the description for Video 3.</div>
+    </div>
+    <div class="video-container">
+        <img src="https://via.placeholder.com/180" alt="Image 4" class="top-left-image">
+        <video controls class="main-video">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video controls class="top-right-video">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="description">This is the description for Video 4.</div>
+    </div>
+</div>
+
+</body>
+</html>
