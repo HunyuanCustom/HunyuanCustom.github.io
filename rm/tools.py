@@ -145,7 +145,7 @@ def concat_video():
 
 
 def concat_image():
-    vpath = '/apdcephfs_cq10/share_1367250/wellszhou/code/vrag/Hunyuan_vRAG_720p_infer/hymm.github.io/static/videos/single_diff'
+    vpath = '/apdcephfs_cq10/share_1367250/wellszhou/code/vrag/Hunyuan_vRAG_720p_infer/backup/videos/single_diff'
     from decord import VideoReader
     height, width = 720, 1280
     frames = 129
@@ -153,9 +153,9 @@ def concat_image():
     num_imgs = 4
     idx = [0,25,50,100]
     model_name = ['Ours', 'Keling', 'Vidu', 'Pika', 'Hailuo', 'Skyreels', 'VACE']
-    imgpath = f'{vpath}/human_002.png'
-    vlist = [f'{vpath}/{x}_002.mp4' for x in ['hunyuan', 'keling', 'vidu', 'pika', 'hailuo', 'skyreels', 'vace']]
-    prompt = 'Prompt: A woman is drinking coffee at a cafe.'
+    imgpath = f'{vpath}/032.png'
+    vlist = [f'{vpath}/{x}_032.mp4' for x in ['hunyuan', 'keling', 'vidu', 'pika', 'hailuo', 'skyreels', 'vace']]
+    prompt = 'Prompt: In a music rehearsal room, a woman holds a violin, concentrating on playing.'
     # imgpath = f'{vpath}/new_006.png'
     # vlist = [f'{vpath}/{x}_006.mp4' for x in ['hunyuan', 'keling', 'vidu', 'pika', 'hailuo', 'skyreels', 'vace']]
     # prompt = 'Prompt: A man selects fresh fruits and vegetables from a stall at the market.'
@@ -367,8 +367,8 @@ def edit_resize_img():
 if __name__ == "__main__":
     # story_concat()
     # concat_video()
-    # concat_image()
-    multiref_concat_video()
+    concat_image()
+    # multiref_concat_video()
     # audio_concat_video()
     # edit_resize_img()
     # resize_video()
