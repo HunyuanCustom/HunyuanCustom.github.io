@@ -229,7 +229,7 @@ def multiref_concat_video():
     height, width = 720, 1280
     frames = 129
     pad = 20
-    cls_id = 8
+    cls_id = 1
     imgpath = f'{vpath}/image/{cls_id}-human.jpg'
     imgpath2= f'{vpath}/image/{cls_id}.jpg'
     vlist = [f'{vpath}/{x}_{cls_id}.mp4' for x in ['hunyuan', 'keling', 'vidu', 'pika', 'skyreels', 'vace']]
@@ -367,8 +367,8 @@ def edit_resize_img():
 if __name__ == "__main__":
     # story_concat()
     # concat_video()
-    concat_image()
-    # multiref_concat_video()
+    # concat_image()
+    multiref_concat_video()
     # audio_concat_video()
     # edit_resize_img()
     # resize_video()
