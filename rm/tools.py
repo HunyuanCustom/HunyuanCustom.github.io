@@ -300,6 +300,78 @@ def multiref_concat_video():
 
 
 
+def multiref_concat_video_v2():
+    vpath = '/apdcephfs_cq10/share_1367250/wellszhou/code/vrag/Hunyuan_vRAG_720p_infer/backup/videos/multi_diff'
+    from decord import VideoReader
+    height, width = 720, 1280
+    frames = 129
+    pad = 20
+    cls_id = 8
+    imgpath = f'{vpath}/image/{cls_id}-human.jpg'
+    imgpath2= f'{vpath}/image/{cls_id}.jpg'
+    vlist = [f'{vpath}/{x}_{cls_id}.mp4' for x in ['hunyuan', 'keling', 'vidu', 'pika', 'skyreels', 'vace'][:1]]
+
+    img = Image.open(imgpath).convert('RGB')
+    img1 = pad_image(np.array(img), ( width//2, height))
+    img2 = pad_image(np.array(Image.open(imgpath2).convert('RGB')), ( width//2, height))
+    img = np.hstack([img1, img2]); print(img.shape)
+    
+    res = [];  mlist = ['Ref', 'Ours', 'Keling',  'Vidu', 'Pika', 'Skyreels', 'VACE']
+    for text in mlist[:1]:
+        w2=img.shape[1]
+        
+        right_put = np.ones((180, w2+pad, 3), dtype=np.uint8)*255
+        if text=='Ours':
+            color = (255, 0, 0)
+        else:
+            color = (0,0,0)
+        cv2.putText(right_put, 'Ref1   Ref2', (140, 120), cv2.FONT_HERSHEY_COMPLEX, 5, color, 5)
+        res.append(right_put)
+    
+    
+    vres=[]
+    for idx, vname in enumerate(vlist):
+        video = VideoReader(vname)
+        sample_ids = list(range(len(video)))    
+        frames = video.get_batch(sample_ids).asnumpy()
+        # if idx==0:
+        #     frames = frames[:, :512]
+        if len(frames) < 129:
+            frames = np.concatenate([frames]+[frames[-1][None]]*(129-len(frames)), axis=0)
+        frames = frames[:129]
+        fh, fw = frames.shape[1:3]
+        if frames.shape[1]!=height:
+            frames = np.array([cv2.resize(frame, (int(height/fh*fw), height)) for frame in frames])
+        vres.append(frames)
+        vres.append(np.ones_like(frames[:,:,:pad])*255)
+
+        w2 = int(height/fh*fw)
+        
+        right_put = np.ones((180, int(height/fh*fw)+pad, 3), dtype=np.uint8)*255
+        color = (0,0,0)
+        cv2.putText(right_put, 'Result', (w2//5, 120), cv2.FONT_HERSHEY_COMPLEX, 5, color, 5)
+        res.append(right_put)
+        print(idx, w2, frames.shape, right_put.shape)
+    text_img = np.hstack(res)
+    # cv2.imwrite(imgpath.replace('.jpg', '_text.png'), text_img)
+
+    res = np.concatenate(vres, axis=2)
+
+    res2 = []
+    for i in range(res.shape[0]):
+        # breakpoint()
+        tmp = np.concatenate([img, np.ones_like(img[:,:pad])*255, res[i]], axis=1)
+        # tmp = np.vstack([text_img, tmp])
+        # breakpoint()
+        res2.append( tmp[:,:-pad])
+    res = np.array(res2)
+
+    # breakpoint()
+    print('write video...')
+    imageio.mimwrite(imgpath.replace('.jpg', '_multi.mp4'), res, fps=25, quality=5)
+
+
+
 def audio_concat_video():
     vpath = '/apdcephfs_cq10/share_1367250/wellszhou/code/vrag/Hunyuan_vRAG_720p_infer/hymm.github.io/static/videos/audioref'
     vpath = '/apdcephfs_cq10/share_1367250/wellszhou/code/vrag/Hunyuan_vRAG_720p_infer/backup/videos/audio2'
@@ -368,7 +440,8 @@ if __name__ == "__main__":
     # story_concat()
     # concat_video()
     # concat_image()
-    multiref_concat_video()
+    # multiref_concat_video()
     # audio_concat_video()
     # edit_resize_img()
     # resize_video()
+    multiref_concat_video_v2()
